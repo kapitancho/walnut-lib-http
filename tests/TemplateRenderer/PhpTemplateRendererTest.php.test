@@ -1,0 +1,3 @@
+<?php
+echo $viewModel;
+if ($viewModel === 'throw') throw new RuntimeException;

@@ -24,7 +24,7 @@ readonly class RouteMatch implements RequestMatch {
 	private ?array $methods;
 
 	/** @param list<string>|null $methods */
-	public function __construct(string $path = null, array $methods = null, private readonly int $priority = 0) {
+	public function __construct(string $path = null, array $methods = null, private int $priority = 0) {
 		if (is_string($path) && preg_match_all(self::ROUTE_PATTERN_MATCH, $path, $matches)) {
 			$this->pathArgs = $matches[1] ?? [];
 			$path = '^' . preg_replace(self::ROUTE_PATTERN_REPLACE, self::REPLACE_PATTERN, $path) . '$';
