@@ -1,0 +1,29 @@
+{
+    "name": "walnut/lib_http",
+    "authors": [
+        {
+            "name": "Marian Kostadinov",
+            "email": "manchokapitancho@gmail.com"
+        }
+    ],
+	"autoload": {
+		"psr-4": {
+			"Walnut\\Lib\\Http\\": "src/",
+			"Walnut\\Lib\\Test\\Http\\": "tests/"
+		}
+	},
+	"require": {
+		"php": ">=8.2",
+		"walnut/lib_jsonserializer": ">=0.0.1",
+		"walnut/lib_data": "dev-main",
+		"psr/log": ">=3.0.2",
+		"psr/http-message": ">=2.0.0",
+		"psr/http-server-middleware": ">=1.0.2",
+		"psr/http-server-handler": ">=1.0.2",
+		"psr/http-factory": ">=1.1.0"
+	},
+	"require-dev": {
+		"vimeo/psalm": ">=4.23.0",
+		"phpunit/phpunit": ">=9.5.20"
+	}
+}
