@@ -38,15 +38,22 @@ final readonly class AutoWireRequestHandler implements RequestHandlerInterface {
 			$responseMapper ??= $this->parser->getResponseMapper($method);
 
 			if ($responseMapper && !($result instanceof ResponseInterface)) {
-				$result = $responseMapper->mapValue($result,
-					$this->responseBuilder,
-					$this->responseRenderer,
-					$this->viewRenderer,
-				);
+				try {
+					$result = $responseMapper->mapValue($result,
+						$this->responseBuilder,
+						$this->responseRenderer,
+						$this->viewRenderer,
+					);
+				} catch (Throwable $e) {
+					throw new ControllerHelperException(
+						sprintf("Invalid response mapper: %s", $e->getMessage()), previous: $e);
+				}
 			}
 			return ($result instanceof ResponseInterface) ? $result :
 				throw new ControllerHelperException("Invalid response detected");
 
+		} catch (ControllerHelperException $ex) {
+			throw $ex;
 		} catch (Throwable $ex) {
 			throw new ControllerHelperException(
 				sprintf("Invalid controller: %s", $ex->getMessage()), previous: $ex);
